@@ -8,6 +8,7 @@ function App() {
     author: "Franklin D. Roosevelt"
   })
   const [color, setColor] = useState("blue")
+  const [formerNumber, setFormerNumber] = useState(99)
 
   const colorPalette = [
     "#605F5E",
@@ -41,13 +42,18 @@ function App() {
 
   function getQuote() {
     const randomNumber = Math.floor(Math.random() * data.length)
-    const quote = data[randomNumber].quote
-    const author = data[randomNumber].author
-    setQuote({
-      "quote": quote,
-      "author": author
-    })
-    changeColor(colorPalette[randomNumber])
+    if (formerNumber !== randomNumber) {
+      const quote = data[randomNumber].quote
+      const author = data[randomNumber].author
+      setQuote({
+        "quote": quote,
+        "author": author
+      })
+      changeColor(colorPalette[randomNumber])
+      setFormerNumber(randomNumber)
+    } else {
+      getQuote()
+    }
   }
 
   return (
@@ -58,7 +64,8 @@ function App() {
           <footer style={{color: color}} className="blockquote-footer">{quote.author}</footer>
         </blockquote>
         <div className="row align-items-center">
-          <a className="col-3 col-8" target="_blank" href={`https://twitter.com/intent/tweet?text=${'"' + quote.quote + '"' + ' ~' + quote.author}`}><i style={{color: color}} className="fa-brands fa-square-twitter"></i></a>
+          <a className="col-1 me-1" target="_blank" href={`https://twitter.com/intent/tweet?text=${'"' + quote.quote + '"' + ' ~' + quote.author}`}><i style={{color: color}} className="fa-brands fa-square-twitter"></i></a>
+          <a className="col-3 col-5" target="_blank" href="https://github.com/TillJonas27/Quote-Machine" ><i style={{color: color}} className="fa-brands fa-github"></i></a>
           <button style={{color: color}} onClick={getQuote}id="new-quote" className="col align-self-end">New Quote</button>
         </div>
       </div>
