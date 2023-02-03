@@ -1,0 +1,16 @@
+.fa-square-twitter {
+  font-size: 3rem;
+}
+
+body {
+  font-size: 16px;
+}
+
+#root {
+  background-color: blue;
+  transition: background-color 1s ease;
+}
+
+p, button, footer, i {
+  transition: color 1s ease;
+}
