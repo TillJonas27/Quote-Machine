@@ -8,6 +8,7 @@ function App() {
     author: "Franklin D. Roosevelt"
   })
   const [color, setColor] = useState("blue")
+  const [formerNumber, setFormerNumber] = useState(99)
 
   const colorPalette = [
     "#605F5E",
@@ -41,13 +42,18 @@ function App() {
 
   function getQuote() {
     const randomNumber = Math.floor(Math.random() * data.length)
-    const quote = data[randomNumber].quote
-    const author = data[randomNumber].author
-    setQuote({
-      "quote": quote,
-      "author": author
-    })
-    changeColor(colorPalette[randomNumber])
+    if (formerNumber !== randomNumber) {
+      const quote = data[randomNumber].quote
+      const author = data[randomNumber].author
+      setQuote({
+        "quote": quote,
+        "author": author
+      })
+      changeColor(colorPalette[randomNumber])
+      setFormerNumber(randomNumber)
+    } else {
+      getQuote()
+    }
   }
 
   return (
